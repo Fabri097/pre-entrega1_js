@@ -1,38 +1,36 @@
-let producto = "mayonesa";
-let cantidad = 0;
-let articulo = 0;
-let precio = 8;
-let descuento = 0;
 
-console.log("Este producto es:", producto);
+let total = 0;
+let descuentoAplicado = false;
+const tasaDeDescuento = 0.2; 
+const productos = [
+  { nombre: 'Cafe', precio: 12 },
+  { nombre: 'Leche', precio: 5 },
+  { nombre: 'Arroz', precio: 4 },
+  { nombre: 'Azucar', precio: 4 },
+  { nombre: 'Atun', precio: 6 }
+];
 
-cantidad = prompt("Ingrese cuantos productos quieres:");
+let recuentoDeProducto = 0;
 
-function calcularPrecioFinal( precio , descuento){
-    return precio - (precio * descuento /100);
+for (let i = 0; i < productos.length; i++) {
+  let cantidad = prompt(`¿Cuántas unidades de ${productos[i].nombre} deseas? (Precio por unidad es ${productos[i].precio})`);
+  
+  if(cantidad !== null && cantidad !== '' && !isNaN(cantidad)) {
+    cantidad = Number(cantidad);
+    if (cantidad > 0) {
+      recuentoDeProducto++;
+    }
+    total += cantidad * productos[i].precio;
+  } else {
+    alert('Entrada no válida, se asumirá como 0.');
+  }
 }
 
-if (cantidad == 0) {
-  console.log("agregue un producto 😟");
-  precio = precio * cantidad;
-} 
-else if (cantidad >= 1 && cantidad <= 4) {
-  console.log("Se agrego al carrito 🛒");
-  articulo = articulo + parseInt(cantidad);
-  precio = precio * cantidad;
-} 
-else if(cantidad == 5){
-  console.log("adquirio un cupon de 25% descuento en esta compra 🎉")
-  articulo = articulo + parseInt(cantidad);
-  descuento = 25;
-  precio = calcularPrecioFinal(precio * cantidad, descuento)
-}
-else { 
-  console.log(" No puede llevar esta cantidad 🥹");
-  precio = precio * 0
+if (recuentoDeProducto >= 3 && !descuentoAplicado) {
+  total -= total * tasaDeDescuento;
+  descuentoAplicado = true;
+
 }
 
+alert(`El precio final es: $${total}`);
 
-console.log("producto:",producto);
-console.log("cant:",articulo);
-console.log("precio: $",precio);
