@@ -29,8 +29,11 @@ for (let i = 0; i < productos.length; i++) {
 if (recuentoDeProducto >= 3 && !descuentoAplicado) {
   total -= total * tasaDeDescuento;
   descuentoAplicado = true;
-
+  
+  alert(`Se aplico un descuento del 20% al precio final es: $${total}`);
+}
+else if(recuentoDeProducto < 3 && !descuentoAplicado){
+  alert(`El precio final es: $${total}`);
 }
 
-alert(`El precio final es: $${total}`);
 
